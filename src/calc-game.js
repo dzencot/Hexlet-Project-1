@@ -4,7 +4,7 @@
 import game from '../index';
 
 const ruleGame = () => {
-  const result = 'Answer "yes" if number odd otherwise answer "no".';
+  const result = 'What is the result of the expression?';
   return result;
 };
 
@@ -16,11 +16,14 @@ const iterCurrent = () => {
 const questions = (iter) => {
   let result;
   switch (iter) {
+    case 0:
+      result = '4 + 10';
+      break;
     case 1:
-      result = 6;
+      result = '25 - 11';
       break;
     default:
-      result = 15;
+      result = '25 * 7';
       break;
   }
   return result;
@@ -29,13 +32,21 @@ const questions = (iter) => {
 const answers = (iter) => {
   let result;
   switch (iter) {
+    case 0:
+      result = '14';
+      break;
     case 1:
-      result = 'yes';
+      result = '14';
       break;
     default:
-      result = 'no';
+      result = '175';
       break;
   }
+  return result;
+};
+
+const getCorrectAnswer = (iter) => {
+  const result = answers(iter);
   return result;
 };
 
@@ -43,9 +54,5 @@ const getQuestion = (iter) => {
   const result = questions(iter);
   return result;
 };
-const getAnswer = (iter) => {
-  const result = answers(iter);
-  return result;
-};
 
-export default () => { game(ruleGame, iterCurrent, getAnswer, getQuestion); };
+export default () => { game(ruleGame, iterCurrent, getCorrectAnswer, getQuestion); };
