@@ -1,22 +1,27 @@
 // @flow
 /* eslint-disable no-console */
 
-import readlineSync from 'readline-sync';
+import * as index from '../index';
 
-export default (nameUser) => {
+export default () => {
+  index.sayWelcome();
+  index.say('What is the result of the expression?');
+  const nameUser = index.answerNameUser();
+  index.sayHello(nameUser);
+
   const viewQuestion = (a, b, operator) => `${a} ${operator} ${b}`;
 
   const iter = (correctIter, question, correctAnswer) => {
     if (correctIter >= 3) {
-      console.log(`Congratulations, '${nameUser}'!`);
+      index.sayCongratulations(nameUser);
       return 0;
     }
 
-    console.log(`Question: '${question}'`);
-    const answer = readlineSync.question('Your answer: ');
+    index.sayQuestion(question);
+    const answer = index.getAnswer();
 
     if (answer === correctAnswer) {
-      console.log('Correct!');
+      index.sayCorrect();
       const newCorrectIter = correctIter + 1;
       let newQuestion;
       let newAnswer;
@@ -30,11 +35,10 @@ export default (nameUser) => {
       return iter(newCorrectIter, newQuestion, newAnswer);
     }
 
-    console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-    console.log(`Let's try again, '${nameUser}'!`);
-    return iter(correctIter, question, answer);
+    index.sayWrongAnswer(answer, correctAnswer);
+    index.sayTryAgain(nameUser);
+    return iter(correctIter, question, correctAnswer);
   };
 
-  console.log('What is the result of the expression?');
   return iter(0, viewQuestion(4, 10, '+'), '14');
 };
