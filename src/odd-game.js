@@ -1,27 +1,31 @@
 // @flow
 /* eslint-disable no-console */
 
-import readlineSync from 'readline-sync';
+import * as index from '../index';
 
-export default (nameUser) => {
+export default () => {
+  index.sayWelcome();
+  index.say('Answer "yes" if number odd otherwise answer "no"');
+  const nameUser = index.answerNameUser();
+  index.sayHello(nameUser);
+
   const iter = (number, correctIter) => {
     if (correctIter >= 3) {
-      console.log(`Congratulations, '${nameUser}'!`);
+      index.sayCongratulations(nameUser);
       return 0;
     }
-    console.log(`Question: '${number}'`);
-    const answer = readlineSync.question('Your answer: ');
+    index.sayQuestion(number);
+    const answer = index.getAnswer();
     const correctAnswer = number % 2 === 0 ? 'yes' : 'no';
     if (answer === correctAnswer) {
-      console.log('Correct!');
+      index.sayCorrect();
       const newCorrectIter = correctIter + 1;
       const newNumber = newCorrectIter === 1 ? 6 : 15;
       return iter(newNumber, newCorrectIter);
     }
-    console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-    console.log(`Let's try again, '${nameUser}'!`);
+    index.sayWrongAnswer(answer, correctAnswer);
+    index.sayTryAgain(nameUser);
     return iter(number, correctIter);
   };
-  console.log('Answer "yes" if number odd otherwise answer "no"\n');
   return iter(15, 0);
 };
