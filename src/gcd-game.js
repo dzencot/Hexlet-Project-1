@@ -1,5 +1,6 @@
 // @flow
 /* eslint-disable no-console */
+/* eslint arrow-body-style: ["error", "always"]*/
 
 import game from '../index';
 import { cons, car, cdr } from './pairs';
@@ -24,7 +25,8 @@ const getNumbers = (count) => {
   return result;
 };
 
-const getQuestion = (count) => { return `${car(getNumbers(count))} ${cdr(getNumbers(count))}`;
+const getQuestion = (count) => {
+  return `${car(getNumbers(count))} ${cdr(getNumbers(count))}`;
 };
 
 const getAnswer = (count) => {
