@@ -3,30 +3,27 @@
 
 import readlineSync from 'readline-sync';
 
-export const sayWelcome = () => { console.log('Welcome to the Brain Games!'); };
+export default (ruleGame, iterCurrent, getCorrectAnswer, getQuestion) => {
+  console.log('Welcome to the Brain Games!');
+  console.log(ruleGame());
+  const nameUser = readlineSync.question('May I have your name? ');
+  console.log(`Hello, ${nameUser}`);
 
-export const answerNameUser = () => {
-  const result = readlineSync.question('May I have your name? ');
-  return result;
+  const iterFunc = (iter) => {
+    if (iter >= iterCurrent()) {
+      console.log(`Congratulations, ${nameUser}`);
+      return true;
+    }
+    console.log(`Question: ${getQuestion(iter)}`);
+    const answer = readlineSync.question('Your answer: ');
+    const correctAnswer = getCorrectAnswer(iter);
+    if (answer === correctAnswer) {
+      console.log('Correct!');
+      const newIter = iter + 1;
+      return iterFunc(newIter);
+    }
+    console.log(`${answer} is wrong answer ;(. Correct answer was ${correctAnswer}.\nLet's try again, ${nameUser}!`);
+    return iterFunc(iter);
+  };
+  return iterFunc(0);
 };
-
-export const sayHello = (nameUser) => { console.log(`Hello, '${nameUser}'!`); };
-
-export const sayCongratulations = (nameUser) => { console.log(`Congratulations, '${nameUser}!'`); };
-
-export const say = (msg) => { console.log(msg); };
-
-export const getAnswer = () => {
-  const result = readlineSync.question('Your answer: ');
-  return result;
-};
-
-export const sayQuestion = (question) => { console.log(`Question: '${question}'`); };
-
-export const sayCorrect = () => { console.log('Correct!'); };
-
-export const sayWrongAnswer = (answer, correctAnswer) => {
-  console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-};
-
-export const sayTryAgain = (nameUser) => { console.log(`Let's try again, '${nameUser}'!`); };

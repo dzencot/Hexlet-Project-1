@@ -1,31 +1,51 @@
 // @flow
 /* eslint-disable no-console */
 
-import * as index from '../index';
+import game from '../index';
 
-export default () => {
-  index.sayWelcome();
-  index.say('Answer "yes" if number odd otherwise answer "no"');
-  const nameUser = index.answerNameUser();
-  index.sayHello(nameUser);
-
-  const iter = (number, correctIter) => {
-    if (correctIter >= 3) {
-      index.sayCongratulations(nameUser);
-      return 0;
-    }
-    index.sayQuestion(number);
-    const answer = index.getAnswer();
-    const correctAnswer = number % 2 === 0 ? 'yes' : 'no';
-    if (answer === correctAnswer) {
-      index.sayCorrect();
-      const newCorrectIter = correctIter + 1;
-      const newNumber = newCorrectIter === 1 ? 6 : 15;
-      return iter(newNumber, newCorrectIter);
-    }
-    index.sayWrongAnswer(answer, correctAnswer);
-    index.sayTryAgain(nameUser);
-    return iter(number, correctIter);
-  };
-  return iter(15, 0);
+const ruleGame = () => {
+  const result = 'Answer "yes" if number odd otherwise answer "no".';
+  return result;
 };
+
+const iterCurrent = () => {
+  const result = 3;
+  return result;
+};
+
+const questions = (iter) => {
+  let result;
+  switch (iter) {
+    case 1:
+      result = 6;
+      break;
+    default:
+      result = 15;
+      break;
+  }
+  return result;
+};
+
+const answers = (iter) => {
+  let result;
+  switch (iter) {
+    case 1:
+      result = 'yes';
+      break;
+    default:
+      result = 'no';
+      break;
+  }
+  return result;
+};
+
+const getQuestion = (iter) => {
+  const result = questions(iter);
+  return result;
+};
+const getAnswer = (iter) => {
+  const result = answers(iter);
+  return result;
+};
+
+export default () => { game(ruleGame, iterCurrent, getAnswer, getQuestion); };

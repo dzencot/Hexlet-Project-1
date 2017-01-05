@@ -2,6 +2,6 @@
 // @flow
 /* eslint-disable no-console */
 
-import oddGame from '../src/odd-game';
+import oddGame from '../odd-game';
 
 oddGame();

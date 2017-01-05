@@ -2,6 +2,6 @@
 // @flow
 /* eslint-disable no-console */
 
-import calcGame from '../src/calc-game';
+import calcGame from '../calc-game';
 
 calcGame();
