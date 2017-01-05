@@ -2,10 +2,10 @@
 // @flow
 /* eslint-disable no-console */
 
-import oddGame from '../src/odd-game';
+import calcGame from '../src/calc-game';
 import * as index from '../index';
 
 index.sayWelcome();
 const name = index.answerNameUser();
 index.sayHello(name);
-oddGame(name);
+calcGame(name);
