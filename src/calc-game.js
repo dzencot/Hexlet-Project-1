@@ -3,19 +3,13 @@
 
 import game from '../index';
 
-const ruleGame = () => {
-  const result = 'What is the result of the expression?';
-  return result;
-};
+const ruleGame = 'What is the result of the expression?';
 
-const iterCurrent = () => {
-  const result = 3;
-  return result;
-};
+const iterCurrent = 3;
 
-const questions = (iter) => {
+const questions = (count) => {
   let result;
-  switch (iter) {
+  switch (count) {
     case 0:
       result = '4 + 10';
       break;
@@ -29,9 +23,9 @@ const questions = (iter) => {
   return result;
 };
 
-const answers = (iter) => {
+const answers = (count) => {
   let result;
-  switch (iter) {
+  switch (count) {
     case 0:
       result = '14';
       break;
@@ -45,14 +39,4 @@ const answers = (iter) => {
   return result;
 };
 
-const getCorrectAnswer = (iter) => {
-  const result = answers(iter);
-  return result;
-};
-
-const getQuestion = (iter) => {
-  const result = questions(iter);
-  return result;
-};
-
-export default () => { game(ruleGame, iterCurrent, getCorrectAnswer, getQuestion); };
+export default () => { game(ruleGame, iterCurrent, answers, questions); };

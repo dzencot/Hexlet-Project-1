@@ -3,19 +3,13 @@
 
 import game from '../index';
 
-const ruleGame = () => {
-  const result = 'Answer "yes" if number odd otherwise answer "no".';
-  return result;
-};
+const ruleGame = 'Answer "yes" if number odd otherwise answer "no".';
 
-const iterCurrent = () => {
-  const result = 3;
-  return result;
-};
+const iterCurrent = 3;
 
-const questions = (iter) => {
+const questions = (count) => {
   let result;
-  switch (iter) {
+  switch (count) {
     case 1:
       result = 6;
       break;
@@ -26,9 +20,9 @@ const questions = (iter) => {
   return result;
 };
 
-const answers = (iter) => {
+const answers = (count) => {
   let result;
-  switch (iter) {
+  switch (count) {
     case 1:
       result = 'yes';
       break;
@@ -39,13 +33,5 @@ const answers = (iter) => {
   return result;
 };
 
-const getQuestion = (iter) => {
-  const result = questions(iter);
-  return result;
-};
-const getAnswer = (iter) => {
-  const result = answers(iter);
-  return result;
-};
 
-export default () => { game(ruleGame, iterCurrent, getAnswer, getQuestion); };
+export default () => { game(ruleGame, iterCurrent, answers, questions); };
