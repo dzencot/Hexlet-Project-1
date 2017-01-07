@@ -4,7 +4,7 @@
 import readlineSync from 'readline-sync';
 
 // Основная логика игры
-export default (ruleGame, getCorrectAnswer, getQuestion) => {
+export default (ruleGame, getCorrectAnswer, getQuestion, viewQuestion) => {
   // покажем приветствие
   console.log('Welcome to the Brain Games!');
   // покажем правила игры
@@ -25,7 +25,8 @@ export default (ruleGame, getCorrectAnswer, getQuestion) => {
     }
     // показываем вопрос и спрашиваем ответ
     const question = getQuestion();
-    console.log(`Question: ${question}`);
+    const viewQ = viewQuestion(question);
+    console.log(`Question: ${viewQ}`);
     const answer = readlineSync.question('Your answer: ');
     const correctAnswer = getCorrectAnswer(question);
     // правильный ответ?

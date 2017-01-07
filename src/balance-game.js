@@ -2,59 +2,47 @@
 /* eslint-disable no-console */
 /* eslint no-param-reassign: ["error", { "props": false}]*/
 /* eslint arrow-body-style: ["error", "always"]*/
-// Игра "Баланс"
 
 import game from '../index';
 
 // Функция, вызывающая логику игры
 export default () => {
-  // вспомогательная функция генерация операции вычисления
-  const getOperator = () => {
-    switch (Math.floor(Math.random() * (4 - 1 + 1)) + 1) {
-      case 1:
-        return '+';
-        break;
-      case 2:
-        return '-';
-        break;
-      case 3:
-        return '*';
-        break;
-      default:
-        return '/';
-        break;
-    }
-  };
-
   // генерация вопроса
   const getQuestion = () => {
-    const operator = getOperator();
-    const number1 = Math.floor(Math.random() * (100 - 1 + 1)) + 1);
-    const number2 = Math.floor(Math.random() * (100 - 1 + 1)) + 1);
-    return { operator, number1, number2 };
+    return Math.floor(Math.random() * (9901)) + 100;
   };
 
   // получение ответа
-  const getAnswer = (operator, number1, number2) => {
-    switch (operator) {
-      case '+':
-        return number1 + number2;
-        break;
-      case '-':
-        return number1 - number2;
-        break;
-      case '*':
-        return number1 * number2;
-        break;
-      default:
-        return number1 / number2;
-    }
+  const getAnswer = (number) => {
+    // число в строку
+    const numbers = String(number).split('');
+    // функция для сортировки
+    const funcSort = (a, b) => {
+      return a > b;
+    };
+    // сортируем и сравниваем концы
+    // если надо, складываем-вычитаем концы
+    const funcIter = (acc) => {
+      // слишком короткую строку не обрабатываем
+      if (acc.length === 1) {
+        return acc;
+      }
+      if (+acc[acc.length - 1] > +acc[0] + 1) {
+        acc[acc.length - 1] = +acc[acc.length - 1] - 1;
+        acc[0] = +acc[0] + 1;
+        return funcIter(acc.sort(funcSort));
+      }
+      return acc.join('');
+    };
+    return funcIter(numbers.sort(funcSort));
   };
   // Правила игры
-  // "Найди сбалансированное число"
-  const ruleGame = 'Balance the given number.';
+  const ruleGame = 'Balance the given number';
 
   return game(ruleGame,
-    (operator, number1, number2) => getAnswer(operator, number1, number2),
-    (operator, number1, number2) => `${number1} ${operator} ${number2});
+    getAnswer,
+    getQuestion,
+    (number) => {
+      return number;
+    });
 };
