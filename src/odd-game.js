@@ -1,37 +1,59 @@
 // @flow
 /* eslint-disable no-console */
-
+// Игра "Проверка на четность"
+import { cons, car, cdr } from 'hexlet-pairs';
 import game from '../index';
 
+// Правила игры
+// "Ответь 'yes', если число четное, иначе ответь 'no'
 const ruleGame = 'Answer "yes" if number odd otherwise answer "no".';
 
+// Количество верных ответов
 const iterCurrent = 3;
 
-const questions = (count) => {
-  let result;
-  switch (count) {
-    case 1:
-      result = 6;
-      break;
-    default:
-      result = 15;
-      break;
+// Инициируем список вопросов и ответов
+let questions = cons(null, null);
+
+// Функция добавления вопроса
+const addQuestion = (question) => {
+  // сразу вычисляем ответ и запоминаем с привязкой к вопросу
+  const newAnswer = question % 2 === 0 ? 'yes' : 'no';
+  const newQuestion = cons(question, newAnswer);
+
+  // сохраняем новый список
+  // если список пустой
+  if (car(questions) === null) {
+    questions = cons(newQuestion, null);
+    return 0;
   }
-  return result;
+  // если нет, то добавляем в начало
+  questions = cons(newQuestion, questions);
+  return 0;
 };
 
-const answers = (count) => {
-  let result;
-  switch (count) {
-    case 1:
-      result = 'yes';
-      break;
-    default:
-      result = 'no';
-      break;
-  }
-  return result;
+// Функция, извлекающая пару(вопрос, ответ) под нужным номером, либо последнюю
+const findQuestion = (count) => {
+  const funcIter = (list, iter) => {
+    if (iter === count || cdr(list) === null) {
+      return car(list);
+    }
+    return funcIter(cdr(list), iter + 1);
+  };
+
+  return funcIter(questions, 0);
 };
 
+// Функция, извлекающая вопрос
+const getQuestion = (count) => { return car(findQuestion(count)); };
 
-export default () => { game(ruleGame, iterCurrent, answers, questions); };
+// Функция, извлекающая ответ
+const getAnswer = (count) => { return cdr(findQuestion(count)); };
+
+
+// Функция, вызывающая логику игры
+export default () => {
+  addQuestion(15);
+  addQuestion(6);
+  addQuestion(13);
+  game(ruleGame, iterCurrent, getAnswer, getQuestion);
+};
