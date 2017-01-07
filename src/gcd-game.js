@@ -16,7 +16,7 @@ const iterCurrent = 3;
 let questions = null;
 
 // опишем добавление вопроса и ответа
-const addQuestion = (a, b) => {
+const addQuestion = (number1, number2) => {
   // вычисляем ответ
   const iter = (a, b) => {
     if (a !== 0 && b !== 0) {
@@ -27,17 +27,17 @@ const addQuestion = (a, b) => {
     }
     return a + b;
   };
-  const answer = iter(a, b);
+  const answer = iter(number1, number2);
   // вопрос-ответ хранится по типу
   // (('число1', 'число2')), 'ответ')
-  const newQuestion = cons(cons(a, b), answer);
+  const newQuestion = cons(cons(number1, number2), answer);
 
   // добавляем в начало
   questions = cons(newQuestion, questions);
   return 0;
 };
 
-//// Функция, извлекающая пару(вопрос, ответ) под нужным номером, либо последнюю
+// Функция, извлекающая пару(вопрос, ответ) под нужным номером, либо последнюю
 const findQuestion = (count) => {
   const funcIter = (list, iter) => {
     if (iter === count || cdr(list) === null) {

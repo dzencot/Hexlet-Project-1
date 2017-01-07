@@ -1,5 +1,6 @@
 // @flow
 /* eslint-disable no-console */
+/* eslint arrow-body-style: ["error", "always"]*/
 // Игра "Проверка на четность"
 import { cons, car, cdr } from 'hexlet-pairs';
 import game from '../index';
@@ -53,3 +54,4 @@ export default () => {
   addQuestion(13);
   return game(ruleGame, iterCurrent, getAnswer, getQuestion);
 };
+

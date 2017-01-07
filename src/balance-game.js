@@ -1,14 +1,15 @@
 // @flow
 /* eslint-disable no-console */
+/* eslint no-param-reassign: ["error", { "props": false}]*/
 /* eslint arrow-body-style: ["error", "always"]*/
-// Игра "Калькулятор"
+// Игра "Баланс"
 
 import { cons, car, cdr } from 'hexlet-pairs';
 import game from '../index';
 
 // Правила игры
-// "Какой результат выражения?"
-const ruleGame = 'What is the result of the expression?';
+// "Найди сбалансированное число"
+const ruleGame = 'Balance the given number.';
 
 // Количество верных ответов
 const iterCurrent = 3;
@@ -17,26 +18,28 @@ const iterCurrent = 3;
 let questions = null;
 
 // опишем добавление вопроса и ответа
-const addQuestion = (operator, a, b) => {
+const addQuestion = (number) => {
   // вычисляем ответ
-  let result;
-  switch (operator) {
-    case '/':
-      result = a / b;
-      break;
-    case '+':
-      result = a + b;
-      break;
-    case '*':
-      result = a * b;
-      break;
-    default:
-      result = a - b;
-      break;
-  }
-  // вопрос-ответ хранится по типу
-  // (('знак вычисления', ('число1', 'число2')), 'ответ')
-  const newQuestion = cons(cons(operator, cons(a, b)), result);
+  // преобразуем число в строку
+  const numbers = String(number).split('');
+  // определим как будем сортировать
+  const funcSort = (a, b) => { return a > b; };
+  // алгоритм довольно простой: сортируем и сравнимаем концы
+  // если надо, делаем +1 в начало и -1 в конец
+  const funcIter = (acc) => {
+    if (acc.length === 1) {
+      return acc;
+    }
+    if (+acc[acc.length - 1] > +acc[0] + 1) {
+      acc[acc.length - 1] = +acc[acc.length - 1] - 1;
+      acc[0] = +acc[0] + 1;
+      acc.sort(funcSort);
+      return funcIter(acc);
+    }
+    return acc.join('');
+  };
+
+  const newQuestion = cons(number, funcIter(numbers.sort(funcSort)));
 
   // добавляем в начало
   questions = cons(newQuestion, questions);
@@ -56,13 +59,7 @@ const findQuestion = (count) => {
 };
 
 // Функция, извлекающая вопрос
-const getQuestion = (count) => {
-  // числа и оператор хранятся довольно запутано. подглядываем сверху=)
-  const operator = car(car(findQuestion(count)));
-  const number1 = car(cdr(car(findQuestion(count))));
-  const number2 = cdr(cdr(car(findQuestion(count))));
-  return `${number1} ${operator} ${number2}`;
-};
+const getQuestion = (count) => { return car(findQuestion(count)); };
 
 // Функция, извлекающая ответ
 // кстати, ответ должен быть строкой, чтобы сравнение ответов было однотипным
@@ -72,9 +69,8 @@ const getAnswer = (count) => { return `${cdr(findQuestion(count))}`; };
 // Функция, вызывающая логику игры
 export default () => {
   // добавляем вопросы
-  addQuestion('*', 25, 7);
-  addQuestion('-', 25, 11);
-  addQuestion('+', 4, 10);
+  addQuestion(355);
+  addQuestion(4181);
+  addQuestion(215);
   return game(ruleGame, iterCurrent, getAnswer, getQuestion);
 };
-
