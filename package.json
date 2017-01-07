@@ -40,6 +40,7 @@
     "flow-typed": "^2.0.0"
   },
   "dependencies": {
+    "hexlet-pairs": "^0.1.4",
     "readline-sync": "^1.4.5"
   }
 }
