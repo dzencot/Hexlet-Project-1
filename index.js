@@ -4,7 +4,7 @@
 import readlineSync from 'readline-sync';
 
 // Основная логика игры
-export default (ruleGame, maxCurrent, getCorrectAnswer, getQuestion) => {
+export default (ruleGame, getCorrectAnswer, getQuestion) => {
   // покажем приветствие
   console.log('Welcome to the Brain Games!');
   // покажем правила игры
@@ -14,6 +14,7 @@ export default (ruleGame, maxCurrent, getCorrectAnswer, getQuestion) => {
   // поприветствуем пользователя
   console.log(`Hello, ${nameUser}`);
 
+  const maxCurrent = 3;
   // рекурсия игры
   const iterFunc = (count) => {
     // играем пока количество правильных ответов не достигло минимума
@@ -23,9 +24,10 @@ export default (ruleGame, maxCurrent, getCorrectAnswer, getQuestion) => {
       return true;
     }
     // показываем вопрос и спрашиваем ответ
-    console.log(`Question: ${getQuestion(count)}`);
+    const question = getQuestion();
+    console.log(`Question: ${question}`);
     const answer = readlineSync.question('Your answer: ');
-    const correctAnswer = getCorrectAnswer(count);
+    const correctAnswer = getCorrectAnswer(question);
     // правильный ответ?
     if (answer === correctAnswer) {
       // сообщаем, что ответ правильный, добавляем счетчик правильных ответов
