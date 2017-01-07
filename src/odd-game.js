@@ -12,7 +12,7 @@ const ruleGame = 'Answer "yes" if number odd otherwise answer "no".';
 const iterCurrent = 3;
 
 // Инициируем список вопросов и ответов
-let questions = cons(null, null);
+let questions = null;
 
 // Функция добавления вопроса
 const addQuestion = (question) => {
@@ -21,12 +21,7 @@ const addQuestion = (question) => {
   const newQuestion = cons(question, newAnswer);
 
   // сохраняем новый список
-  // если список пустой
-  if (car(questions) === null) {
-    questions = cons(newQuestion, null);
-    return 0;
-  }
-  // если нет, то добавляем в начало
+  // добавляем в начало
   questions = cons(newQuestion, questions);
   return 0;
 };
@@ -47,6 +42,7 @@ const findQuestion = (count) => {
 const getQuestion = (count) => { return car(findQuestion(count)); };
 
 // Функция, извлекающая ответ
+// ответ уже является строкой
 const getAnswer = (count) => { return cdr(findQuestion(count)); };
 
 
@@ -55,5 +51,5 @@ export default () => {
   addQuestion(15);
   addQuestion(6);
   addQuestion(13);
-  game(ruleGame, iterCurrent, getAnswer, getQuestion);
+  return game(ruleGame, iterCurrent, getAnswer, getQuestion);
 };
