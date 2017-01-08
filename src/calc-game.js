@@ -5,6 +5,7 @@
 
 import game from '../index';
 import random from './functions/random';
+import calc from './functions/mathResult';
 
 // Функция, вызывающая логику игры
 export default () => {
@@ -38,20 +39,7 @@ export default () => {
 
   // получение ответа
   const getAnswer = (question) => {
-    let result;
-    switch (question.operator) {
-      case '+':
-        result = question.number1 + question.number2;
-        break;
-      case '-':
-        result = question.number1 - question.number2;
-        break;
-      case '*':
-        result = question.number1 * question.number2;
-        break;
-      default:
-        result = question.number1 / question.number2;
-    }
+    const result = calc(question.operator, question.number1, question.number2);
     return `${result}`;
   };
 
