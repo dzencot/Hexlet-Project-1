@@ -3,14 +3,15 @@
 /* eslint arrow-body-style: ["error", "always"]*/
 // Игра "Калькулятор"
 
-import { cons, car, cdr } from 'hexlet-pairs';
 import game from '../index';
+import random from './functions/random';
+import calc from './functions/mathResult';
 
 // Функция, вызывающая логику игры
 export default () => {
   // вспомогательная функция генерация операции вычисления
   const getOperator = () => {
-    switch (Math.floor(Math.random() * 4) + 1) {
+    switch (random(1, 4)) {
       case 1:
         return '+';
       case 2:
@@ -24,39 +25,21 @@ export default () => {
 
   // генерация вопроса
   const getQuestion = () => {
-    const operator = getOperator();
-    const number1 = Math.floor(Math.random() * 100) + 1;
-    const number2 = Math.floor(Math.random() * 100) + 1;
-    return cons(operator, cons(number1, number2));
+    return {
+      operator: getOperator(),
+      number1: random(1, 100),
+      number2: random(1, 100),
+    };
   };
 
   // как выглядит вопрос
   const viewQuestion = (question) => {
-    const operator = car(question);
-    const number1 = car(cdr(question));
-    const number2 = cdr(cdr(question));
-    return `${number1} ${operator} ${number2}`;
+    return `${question.number1} ${question.operator} ${question.number2}`;
   };
 
   // получение ответа
   const getAnswer = (question) => {
-    const operator = car(question);
-    const number1 = car(cdr(question));
-    const number2 = cdr(cdr(question));
-    let result;
-    switch (operator) {
-      case '+':
-        result = number1 + number2;
-        break;
-      case '-':
-        result = number1 - number2;
-        break;
-      case '*':
-        result = number1 * number2;
-        break;
-      default:
-        result = number1 / number2;
-    }
+    const result = calc(question.operator, question.number1, question.number2);
     return `${result}`;
   };
 
