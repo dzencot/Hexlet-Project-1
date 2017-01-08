@@ -4,12 +4,13 @@
 // Игра "Калькулятор"
 
 import game from '../index';
+import random from './functions/random';
 
 // Функция, вызывающая логику игры
 export default () => {
   // вспомогательная функция генерация операции вычисления
   const getOperator = () => {
-    switch (Math.floor(Math.random() * 4) + 1) {
+    switch (random(1, 4)) {
       case 1:
         return '+';
       case 2:
@@ -25,8 +26,8 @@ export default () => {
   const getQuestion = () => {
     return {
       operator: getOperator(),
-      number1: Math.floor(Math.random() * 100) + 1,
-      number2: Math.floor(Math.random() * 100) + 1,
+      number1: random(1, 100),
+      number2: random(1, 100),
     };
   };
 

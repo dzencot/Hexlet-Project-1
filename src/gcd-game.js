@@ -3,6 +3,7 @@
 /* eslint arrow-body-style: ["error", "always"]*/
 
 import game from '../index';
+import random from './functions/random';
 
 // Функция, вызывающая логику игры
 export default () => {
@@ -10,8 +11,8 @@ export default () => {
   // вопрос
   const getQuestion = () => {
     return {
-      number1: Math.floor(Math.random() * 100) + 1,
-      number2: Math.floor(Math.random() * 100) + 1,
+      number1: random(1, 100),
+      number2: random(1, 100),
     };
   };
 

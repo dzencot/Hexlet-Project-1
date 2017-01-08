@@ -1,15 +1,15 @@
 // @flow
 /* eslint-disable no-console */
-/* eslint no-param-reassign: ["error", { "props": false}]*/
 /* eslint arrow-body-style: ["error", "always"]*/
 
 import game from '../index';
+import random from './functions/random';
 
 // Функция, вызывающая логику игры
 export default () => {
   // генерация вопроса
   const getQuestion = () => {
-    return Math.floor(Math.random() * (9901)) + 100;
+    return random(100, 99999);
   };
 
   // получение ответа
@@ -18,7 +18,7 @@ export default () => {
     const numbers = String(number).split('');
     // функция для сортировки
     const funcSort = (a, b) => {
-      return a > b;
+      return +a > +b;
     };
     // сортируем и сравниваем концы
     // если надо, складываем-вычитаем концы
@@ -28,8 +28,10 @@ export default () => {
         return acc;
       }
       if (+acc[acc.length - 1] > +acc[0] + 1) {
-        acc[acc.length - 1] = +acc[acc.length - 1] - 1;
-        acc[0] = +acc[0] + 1;
+        const firstNum = +acc.shift();
+        const lastNum = +acc.pop();
+        acc.push(String(lastNum - 1));
+        acc.unshift(String(firstNum + 1));
         return funcIter(acc.sort(funcSort));
       }
       return acc.join('');
