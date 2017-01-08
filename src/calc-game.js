@@ -1,42 +1,71 @@
 // @flow
 /* eslint-disable no-console */
+/* eslint arrow-body-style: ["error", "always"]*/
+// Игра "Калькулятор"
 
+import { cons, car, cdr } from 'hexlet-pairs';
 import game from '../index';
 
-const ruleGame = 'What is the result of the expression?';
+// Функция, вызывающая логику игры
+export default () => {
+  // вспомогательная функция генерация операции вычисления
+  const getOperator = () => {
+    switch (Math.floor(Math.random() * 4) + 1) {
+      case 1:
+        return '+';
+      case 2:
+        return '-';
+      case 3:
+        return '*';
+      default:
+        return '/';
+    }
+  };
 
-const iterCurrent = 3;
+  // генерация вопроса
+  const getQuestion = () => {
+    const operator = getOperator();
+    const number1 = Math.floor(Math.random() * 100) + 1;
+    const number2 = Math.floor(Math.random() * 100) + 1;
+    return cons(operator, cons(number1, number2));
+  };
 
-const questions = (count) => {
-  let result;
-  switch (count) {
-    case 0:
-      result = '4 + 10';
-      break;
-    case 1:
-      result = '25 - 11';
-      break;
-    default:
-      result = '25 * 7';
-      break;
-  }
-  return result;
+  // как выглядит вопрос
+  const viewQuestion = (question) => {
+    const operator = car(question);
+    const number1 = car(cdr(question));
+    const number2 = cdr(cdr(question));
+    return `${number1} ${operator} ${number2}`;
+  };
+
+  // получение ответа
+  const getAnswer = (question) => {
+    const operator = car(question);
+    const number1 = car(cdr(question));
+    const number2 = cdr(cdr(question));
+    let result;
+    switch (operator) {
+      case '+':
+        result = number1 + number2;
+        break;
+      case '-':
+        result = number1 - number2;
+        break;
+      case '*':
+        result = number1 * number2;
+        break;
+      default:
+        result = number1 / number2;
+    }
+    return `${result}`;
+  };
+
+  // Правила игры
+  const ruleGame = 'What is the result of the expression?';
+
+  return game(ruleGame,
+    getAnswer,
+    getQuestion,
+    viewQuestion);
 };
 
-const answers = (count) => {
-  let result;
-  switch (count) {
-    case 0:
-      result = '14';
-      break;
-    case 1:
-      result = '14';
-      break;
-    default:
-      result = '175';
-      break;
-  }
-  return result;
-};
-
-export default () => { game(ruleGame, iterCurrent, answers, questions); };

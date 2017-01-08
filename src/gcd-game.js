@@ -2,45 +2,41 @@
 /* eslint-disable no-console */
 /* eslint arrow-body-style: ["error", "always"]*/
 
+import { cons, car, cdr } from 'hexlet-pairs';
 import game from '../index';
-import { cons, car, cdr } from './pairs';
 
-const ruleGame = 'Find the greatest common divisor of given numbers.';
-
-const iterCurrent = 3;
-
-const getNumbers = (count) => {
-  let result;
-  switch (count) {
-    case 0:
-      result = cons(25, 50);
-      break;
-    case 1:
-      result = cons(100, 52);
-      break;
-    default:
-      result = cons(3, 9);
-      break;
-  }
-  return result;
-};
-
-const getQuestion = (count) => {
-  return `${car(getNumbers(count))} ${cdr(getNumbers(count))}`;
-};
-
-const getAnswer = (count) => {
-  const iter = (a, b) => {
-    if (a !== 0 && b !== 0) {
-      if (a > b) {
-        return iter(a % b, b);
-      }
-      return iter(b % a, a);
-    }
-    return a + b;
+// Функция, вызывающая логику игры
+export default () => {
+  const ruleGame = 'Find the greatest common divisor of given numbers.';
+  // вопрос
+  const getQuestion = () => {
+    const number1 = Math.floor(Math.random() * 100) + 1;
+    const number2 = Math.floor(Math.random() * 100) + 1;
+    return cons(number1, number2);
   };
-  const result = iter(car(getNumbers(count)), cdr(getNumbers(count)));
-  return `${result}`;
+
+  // показываем вопрос
+  const viewQuestion = (question) => {
+    const number1 = car(question);
+    const number2 = cdr(question);
+    return `${number1} ${number2}`;
+  };
+
+  // вычисляем ответ
+  const getAnswer = (question) => {
+    const number1 = car(question);
+    const number2 = cdr(question);
+    const iter = (a, b) => {
+      if (a !== 0 && b !== 0) {
+        if (a > b) {
+          return iter(a % b, b);
+        }
+        return iter(b % a, a);
+      }
+      return a + b;
+    };
+    return `${iter(number1, number2)}`;
+  };
+  return game(ruleGame, getAnswer, getQuestion, viewQuestion);
 };
 
-export default () => { game(ruleGame, iterCurrent, getAnswer, getQuestion); };
