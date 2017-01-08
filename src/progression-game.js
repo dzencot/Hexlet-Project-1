@@ -2,13 +2,11 @@
 /* eslint-disable no-console */
 /* eslint arrow-body-style: ["error", "always"]*/
 
-import game from '../index';
+import game from '..';
 import random from './functions/random';
 import calc from './functions/mathResult';
 
-// Функция, вызывающая логику игры
 export default () => {
-  // генерация вопроса
   const getQuestion = () => {
     return {
       operator: random(1, 2) === 1 ? '+' : '-',
@@ -18,9 +16,7 @@ export default () => {
     };
   };
 
-  // получение ответа
   const getAnswer = (answer) => {
-    // последовательно вычисляем пока не дойдем до нужного либо до последнего
     const funcIter = (iter, acc) => {
       if (iter >= answer.hideNumber) {
         return acc;
@@ -31,7 +27,6 @@ export default () => {
     return `${result}`;
   };
 
-  // представление вопроса
   const viewAnswer = (answer) => {
     console.log(answer.start, answer.operator, answer.iter);
     const funcIter = (iter, acc) => {
@@ -42,12 +37,10 @@ export default () => {
       return funcIter(iter + 1, acc);
     };
     const result = funcIter(0, [answer.start]);
-    // скрываем недостающее число
     result[answer.hideNumber] = '..';
     return result.join(' ');
   };
 
-  // Правила игры
   const ruleGame = 'What number is missing in this progression?';
 
   return game(ruleGame,
