@@ -1,11 +1,14 @@
 {
   "name": "dzencot_js_l1_brain_games-s12",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "hexlet project L1 Brain Games",
   "main": "index.js",
   "bin": {
-    "brain-even": "./bin/brain-even.js",
-    "brain-calc": "./bin/brain-calc.js"
+    "brain-even": "./src/bin/brain-even.js",
+    "brain-calc": "./src/bin/brain-calc.js",
+    "brain-gcd": "./src/bin/brain-gcd.js",
+    "brain-balance": "./src/bin/brain-balance.js",
+    "brain-progression": "./src/bin/brain-progression.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
