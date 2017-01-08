@@ -1,8 +1,7 @@
 // @flow
 /* eslint-disable no-console */
 /* eslint arrow-body-style: ["error", "always"]*/
-// Игра "Проверка на четность"
-import game from '..;
+import game from '..';
 
 export default () => {
   const getAnswer = (question) => {
