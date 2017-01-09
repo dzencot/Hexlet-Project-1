@@ -1,17 +1,22 @@
 {
   "name": "dzencot_js_l1_brain_games-s12",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "hexlet project L1 Brain Games",
   "main": "index.js",
   "bin": {
-    "brain-even": "./bin/brain-even.js",
-    "brain-calc": "./bin/brain-calc.js"
+    "brain-even": "./src/bin/brain-even.js",
+    "brain-calc": "./src/bin/brain-calc.js",
+    "brain-gcd": "./src/bin/brain-gcd.js",
+    "brain-balance": "./src/bin/brain-balance.js",
+    "brain-progression": "./src/bin/brain-progression.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-node": "babel-node",
     "flow": "flow",
-    "eslint": "eslint"
+    "eslint": "eslint",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -29,13 +34,17 @@
     "babel-eslint": "^7.1.1",
     "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-transform-flow-strip-types": "^6.21.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-env": "^1.1.4",
+    "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-0": "^6.16.0",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-flowtype": "^2.29.2",
     "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
     "flow-bin": "^0.37.4",
     "flow-typed": "^2.0.0"
   },
