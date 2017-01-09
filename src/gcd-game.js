@@ -2,13 +2,11 @@
 /* eslint-disable no-console */
 /* eslint arrow-body-style: ["error", "always"]*/
 
-import game from '../index';
+import game from '..';
 import random from './functions/random';
 
-// Функция, вызывающая логику игры
 export default () => {
   const ruleGame = 'Find the greatest common divisor of given numbers.';
-  // вопрос
   const getQuestion = () => {
     return {
       number1: random(1, 100),
@@ -16,12 +14,10 @@ export default () => {
     };
   };
 
-  // показываем вопрос
   const viewQuestion = (question) => {
     return `${question.number1} ${question.number2}`;
   };
 
-  // вычисляем ответ
   const getAnswer = (question) => {
     const iter = (a, b) => {
       if (a !== 0 && b !== 0) {
