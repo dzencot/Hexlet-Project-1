@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 /* eslint arrow-body-style: ["error", "always"]*/
 
-import game from '..';
+import game from '.';
 import random from './functions/random';
 
 export default () => {

@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-console */
 /* eslint arrow-body-style: ["error", "always"]*/
-import game from '..';
+import game from '.';
 
 export default () => {
   const getAnswer = (question) => {

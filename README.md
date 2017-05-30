@@ -8,17 +8,22 @@ Count](https://codeclimate.com/github/dzencot/js_l1_brain_games-s12/badges/issue
 Status](https://travis-ci.org/dzencot/js_l1_brain_games-s12.svg?branch=features)](https://travis-ci.org/dzencot/js_l1_brain_games-s12)
 # Hexlet project L1 Brain Games #
 
-## Install: ##
+## Games names: ##
+1. brain-even
+2. brain-calc
+3. brain-gcd
+4. brain-balance
+5. brain-progression
+
+## Usage: ##
 ```
    git clone https://github.com/dzencot/js_l1_brain_games-s12 brain_games
    cd brain_games
    make install
+   make run G=<game_name>
 ```
-## Run game: ##
+## Or use npm: ##
 ```
-   make run G=brain-even
-   make run G=brain-calc
-   make run G=brain-gcd
-   make run G=brain-balance
-   make run G=brain-progression
+  npm i dzencot_js_l1_brain_games-s12
+  node dist/bin/<game_name>
 ```

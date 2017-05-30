@@ -3,7 +3,7 @@
 /* eslint arrow-body-style: ["error", "always"]*/
 // Игра "Калькулятор"
 
-import game from '..';
+import game from '.';
 import random from './functions/random';
 import calc from './functions/mathResult';
 

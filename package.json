@@ -1,6 +1,6 @@
 {
   "name": "dzencot_js_l1_brain_games-s12",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "hexlet project L1 Brain Games",
   "main": "index.js",
   "bin": {
