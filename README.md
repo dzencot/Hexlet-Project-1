@@ -25,5 +25,5 @@ Status](https://travis-ci.org/dzencot/js_l1_brain_games-s12.svg?branch=features)
 ## Or use npm: ##
 ```
   npm i dzencot_js_l1_brain_games-s12
-  node dist/bin/<game_name>
+  node node_modules/dzencot_js_l1_brain_games-s12/dist/bin/<game_name>
 ```
