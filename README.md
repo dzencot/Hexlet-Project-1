@@ -6,7 +6,7 @@ Coverage](https://codeclimate.com/github/dzencot/js_l1_brain_games-s12/badges/co
 Count](https://codeclimate.com/github/dzencot/js_l1_brain_games-s12/badges/issue_count.svg)](https://codeclimate.com/github/dzencot/js_l1_brain_games-s12)
 [![Build
 Status](https://travis-ci.org/dzencot/js_l1_brain_games-s12.svg?branch=features)](https://travis-ci.org/dzencot/js_l1_brain_games-s12)
-# Hexlet project L1 Brain Games #
+# Набор математических игр для консоли #
 
 ## Games names: ##
 1. brain-even
